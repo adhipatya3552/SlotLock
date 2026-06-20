@@ -139,61 +139,77 @@ export default function DashboardPage() {
                 Add New Slot
               </button>
             ) : (
-              <div className="rounded-lg border border-border bg-card p-6">
-                <h2 className="mb-4 text-lg font-semibold text-foreground">Create a Time Slot</h2>
-                <form onSubmit={handleAddSlot} className="space-y-4">
+              <div className="rounded-xl border border-primary/20 bg-card p-6 shadow-lg shadow-primary/5 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
+                <h2 className="mb-6 text-lg font-semibold text-foreground">Create a Time Slot</h2>
+                <form onSubmit={handleAddSlot} className="space-y-5">
                   <div className="grid gap-4 sm:grid-cols-3">
+                    {/* Date Input */}
                     <div>
-                      <label htmlFor="date" className="block text-sm font-medium text-foreground mb-1">
+                      <label htmlFor="date" className="block text-sm font-medium text-foreground mb-2">
                         Date
                       </label>
-                      <input
-                        id="date"
-                        type="date"
-                        required
-                        value={formData.date}
-                        onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                        className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      />
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-primary text-lg pointer-events-none">📅</span>
+                        <input
+                          id="date"
+                          type="date"
+                          required
+                          value={formData.date}
+                          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                          className="w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        />
+                      </div>
                     </div>
+
+                    {/* Start Time Input */}
                     <div>
-                      <label htmlFor="startTime" className="block text-sm font-medium text-foreground mb-1">
+                      <label htmlFor="startTime" className="block text-sm font-medium text-foreground mb-2">
                         Start Time
                       </label>
-                      <input
-                        id="startTime"
-                        type="time"
-                        required
-                        value={formData.startTime}
-                        onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
-                        className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      />
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-accent text-lg pointer-events-none">🕐</span>
+                        <input
+                          id="startTime"
+                          type="time"
+                          required
+                          value={formData.startTime}
+                          onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
+                          className="w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        />
+                      </div>
                     </div>
+
+                    {/* End Time Input */}
                     <div>
-                      <label htmlFor="endTime" className="block text-sm font-medium text-foreground mb-1">
+                      <label htmlFor="endTime" className="block text-sm font-medium text-foreground mb-2">
                         End Time
                       </label>
-                      <input
-                        id="endTime"
-                        type="time"
-                        required
-                        value={formData.endTime}
-                        onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
-                        className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      />
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-accent text-lg pointer-events-none">🕑</span>
+                        <input
+                          id="endTime"
+                          type="time"
+                          required
+                          value={formData.endTime}
+                          onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
+                          className="w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+
+                  <div className="flex gap-3 pt-2">
                     <button
                       type="submit"
-                      className="rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground transition hover:opacity-90"
+                      className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition shadow-lg shadow-primary/20 hover:opacity-90 hover:shadow-xl hover:shadow-primary/30"
                     >
+                      <span className="text-lg">✓</span>
                       Create Slot
                     </button>
                     <button
                       type="button"
                       onClick={() => setShowAddSlot(false)}
-                      className="rounded-lg border border-border px-4 py-2 font-semibold text-foreground transition hover:bg-muted"
+                      className="rounded-lg border border-border px-5 py-3 font-medium text-foreground transition hover:bg-muted hover:border-muted-foreground/50"
                     >
                       Cancel
                     </button>
