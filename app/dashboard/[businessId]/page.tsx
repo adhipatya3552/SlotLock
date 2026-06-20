@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Header } from '@/components/header';
+import { StatCard } from '@/components/stat-card';
+import { EmptyState } from '@/components/empty-state';
 import { TimeSlot, Booking, Business } from '@/lib/mock-data';
 
 export default function DashboardPage() {
@@ -96,25 +98,34 @@ export default function DashboardPage() {
   }
 
   const bookingsBySlot = new Map(bookings.map((b) => [b.slotId, b]));
+  const bookedCount = slots.filter((s) => s.status === 'booked').length;
+  const availableCount = slots.filter((s) => s.status === 'open').length;
 
   return (
     <>
       <Header title="SlotLock Dashboard" />
       <main className="min-h-[calc(100vh-80px)] bg-background px-4 py-8 sm:px-6">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-5xl">
           {/* Business Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground">{business.name}</h1>
-            <p className="mt-2 text-muted-foreground">
+            <p className="mt-2 text-sm text-muted-foreground">
               Booking link:{' '}
               <Link
                 href={business.publicLink}
                 target="_blank"
-                className="font-semibold text-primary hover:underline"
+                className="font-semibold text-primary hover:underline break-all"
               >
                 {`${window.location.origin}${business.publicLink}`}
               </Link>
             </p>
+          </div>
+
+          {/* Stats Row */}
+          <div className="mb-8 grid gap-4 md:grid-cols-3">
+            <StatCard label="Total Slots" value={slots.length} icon="📅" color="primary" />
+            <StatCard label="Booked" value={bookedCount} icon="✓" color="accent" />
+            <StatCard label="Available" value={availableCount} icon="⭐" color="muted" />
           </div>
 
           {/* Add Slot Section */}
@@ -122,9 +133,10 @@ export default function DashboardPage() {
             {!showAddSlot ? (
               <button
                 onClick={() => setShowAddSlot(true)}
-                className="rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground transition hover:opacity-90"
+                className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:opacity-90 shadow-lg hover:shadow-xl"
               >
-                + Add New Slot
+                <span className="text-lg">+</span>
+                Add New Slot
               </button>
             ) : (
               <div className="rounded-lg border border-border bg-card p-6">
@@ -195,7 +207,15 @@ export default function DashboardPage() {
           <div className="mb-8">
             <h2 className="mb-4 text-xl font-semibold text-foreground">Available Time Slots</h2>
             {slots.length === 0 ? (
-              <p className="text-muted-foreground">No slots created yet. Add one to get started.</p>
+              <EmptyState
+                icon="📭"
+                title="No time slots yet"
+                description="Create your first time slot to start accepting bookings. Your customers will see available slots on your public booking page."
+                action={{
+                  label: 'Create First Slot',
+                  onClick: () => setShowAddSlot(true),
+                }}
+              />
             ) : (
               <div className="grid gap-4 md:grid-cols-2">
                 {slots.map((slot) => (
@@ -235,7 +255,11 @@ export default function DashboardPage() {
           <div>
             <h2 className="mb-4 text-xl font-semibold text-foreground">Recent Bookings</h2>
             {bookings.length === 0 ? (
-              <p className="text-muted-foreground">No bookings yet.</p>
+              <EmptyState
+                icon="🎫"
+                title="No bookings yet"
+                description="Share your booking link with customers to start receiving appointments. They&apos;ll appear here as they book."
+              />
             ) : (
               <div className="overflow-x-auto rounded-lg border border-border">
                 <table className="w-full">
