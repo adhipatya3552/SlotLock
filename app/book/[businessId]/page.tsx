@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Header } from '@/components/header';
+import { SlotCard } from '@/components/slot-card';
+import { BookingSidebar } from '@/components/booking-sidebar';
+import { EmptyState } from '@/components/empty-state';
 import { TimeSlot, Business } from '@/lib/mock-data';
 
 export default function PublicBookingPage() {
@@ -115,106 +118,35 @@ export default function PublicBookingPage() {
           <div className="grid gap-8 lg:grid-cols-3">
             {/* Available Slots */}
             <div className="lg:col-span-2">
-              <h2 className="mb-4 text-lg font-semibold text-foreground">Available Slots</h2>
+              <h2 className="mb-6 text-xl font-semibold text-foreground">Available Times</h2>
               {slots.length === 0 ? (
-                <p className="text-muted-foreground">No available slots at the moment. Check back soon.</p>
+                <EmptyState
+                  icon="📭"
+                  title="No Available Slots"
+                  description="Sorry, there are no available time slots at the moment. Please check back soon or contact the business directly."
+                />
               ) : (
-                <div className="space-y-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   {slots.map((slot) => (
-                    <button
+                    <SlotCard
                       key={slot.id}
-                      onClick={() => handleSlotSelect(slot)}
-                      className={`w-full rounded-lg border-2 p-4 text-left transition ${
-                        selectedSlot?.id === slot.id
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <p className="font-semibold text-foreground">{slot.date}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {slot.startTime} - {slot.endTime}
-                      </p>
-                    </button>
+                      slot={slot}
+                      isSelected={selectedSlot?.id === slot.id}
+                      onClick={handleSlotSelect}
+                    />
                   ))}
                 </div>
               )}
             </div>
 
-            {/* Booking Form */}
-            <div className="rounded-lg border border-border bg-card p-6 h-fit">
-              <h2 className="mb-4 text-lg font-semibold text-foreground">Your Details</h2>
-              {selectedSlot ? (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="rounded-lg bg-muted p-3">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                      Selected Time
-                    </p>
-                    <p className="mt-1 font-medium text-foreground">{selectedSlot.date}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {selectedSlot.startTime} - {selectedSlot.endTime}
-                    </p>
-                  </div>
-
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
-                      Full Name
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      name="customerName"
-                      required
-                      placeholder="John Doe"
-                      value={formData.customerName}
-                      onChange={handleChange}
-                      className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      name="customerEmail"
-                      required
-                      placeholder="john@example.com"
-                      value={formData.customerEmail}
-                      onChange={handleChange}
-                      className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">
-                      Phone
-                    </label>
-                    <input
-                      id="phone"
-                      type="tel"
-                      name="customerPhone"
-                      required
-                      placeholder="+1-555-0123"
-                      value={formData.customerPhone}
-                      onChange={handleChange}
-                      className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground transition hover:opacity-90 disabled:opacity-50"
-                  >
-                    {submitting ? 'Confirming...' : 'Confirm Booking'}
-                  </button>
-                </form>
-              ) : (
-                <p className="text-muted-foreground text-sm">Select a time slot to book.</p>
-              )}
-            </div>
+            {/* Booking Sidebar */}
+            <BookingSidebar
+              selectedSlot={selectedSlot}
+              formData={formData}
+              onFormChange={handleChange}
+              onSubmit={handleSubmit}
+              isSubmitting={submitting}
+            />
           </div>
         </div>
       </main>
