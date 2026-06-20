@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Header } from '@/components/header';
 import { BookingDemo } from '@/components/booking-demo';
+import { FeatureCard } from '@/components/feature-card';
 
 export default function Home() {
   return (
@@ -46,27 +47,27 @@ export default function Home() {
         <div id="features" className="mt-20 w-full max-w-4xl py-20">
           <h2 className="text-center text-3xl font-bold text-foreground mb-12">Why SlotLock?</h2>
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="rounded-lg border border-border bg-card p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold">
-                ✓
-              </div>
-              <h3 className="text-lg font-semibold text-foreground">No Double-Booking</h3>
-              <p className="mt-2 text-muted-foreground">Each slot can only be booked once. Scheduling conflicts are impossible.</p>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent font-bold">
-                ⚡
-              </div>
-              <h3 className="text-lg font-semibold text-foreground">Instant Setup</h3>
-              <p className="mt-2 text-muted-foreground">Create an account and share your booking link in minutes. No complex configuration.</p>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-6">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold">
-                📱
-              </div>
-              <h3 className="text-lg font-semibold text-foreground">Mobile-Friendly</h3>
-              <p className="mt-2 text-muted-foreground">Beautiful on any device. Your customers can book from anywhere, anytime.</p>
-            </div>
+            <FeatureCard
+              icon="✓"
+              title="No Double-Booking"
+              description="Each slot can only be booked once. Scheduling conflicts are impossible."
+              delay={0}
+              iconColor="primary"
+            />
+            <FeatureCard
+              icon="⚡"
+              title="Instant Setup"
+              description="Create an account and share your booking link in minutes. No complex configuration."
+              delay={100}
+              iconColor="accent"
+            />
+            <FeatureCard
+              icon="📱"
+              title="Mobile-Friendly"
+              description="Beautiful on any device. Your customers can book from anywhere, anytime."
+              delay={200}
+              iconColor="primary"
+            />
           </div>
         </div>
       </main>
