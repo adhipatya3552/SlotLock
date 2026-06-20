@@ -1,23 +1,61 @@
-export default function Page() {
+import Link from 'next/link';
+import { Header } from '@/components/header';
+
+export default function Home() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-[color:light-dark(#fff,#000)] text-[color:light-dark(#000,#fff)]">
-      <svg
-        aria-hidden="true"
-        className="size-20"
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p className="absolute left-1/2 top-[calc(50%+56px)] -translate-x-1/2 whitespace-nowrap text-sm font-medium text-muted-foreground">
-        Your v0 generation will show here.
-      </p>
-    </main>
-  )
+    <>
+      <Header />
+      <main className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center bg-gradient-to-br from-background via-secondary to-background px-4">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+            Book appointments that never double-book
+          </h1>
+          <p className="mt-6 text-xl text-muted-foreground sm:text-2xl">
+            Simple, reliable scheduling for salons, tutors, and doctors.
+          </p>
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 font-semibold text-primary-foreground transition hover:opacity-90"
+            >
+              Get Started
+            </Link>
+            <Link
+              href="#features"
+              className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-3 font-semibold text-primary transition hover:bg-primary/5"
+            >
+              Learn More
+            </Link>
+          </div>
+        </div>
+
+        <div id="features" className="mt-20 w-full max-w-4xl py-20">
+          <h2 className="text-center text-3xl font-bold text-foreground mb-12">Why SlotLock?</h2>
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="rounded-lg border border-border bg-card p-6">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold">
+                ✓
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">No Double-Booking</h3>
+              <p className="mt-2 text-muted-foreground">Each slot can only be booked once. Scheduling conflicts are impossible.</p>
+            </div>
+            <div className="rounded-lg border border-border bg-card p-6">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent font-bold">
+                ⚡
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">Instant Setup</h3>
+              <p className="mt-2 text-muted-foreground">Create an account and share your booking link in minutes. No complex configuration.</p>
+            </div>
+            <div className="rounded-lg border border-border bg-card p-6">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold">
+                📱
+              </div>
+              <h3 className="text-lg font-semibold text-foreground">Mobile-Friendly</h3>
+              <p className="mt-2 text-muted-foreground">Beautiful on any device. Your customers can book from anywhere, anytime.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
 }
