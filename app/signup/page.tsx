@@ -187,7 +187,7 @@ export default function SignupPage() {
                       Creating Account...
                     </span>
                   ) : (
-                    'Create Business Calendar'
+                    'Create Business Account'
                   )}
                 </button>
               </form>
