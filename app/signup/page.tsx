@@ -42,6 +42,9 @@ export default function SignupPage() {
       }
 
       const business = await response.json();
+      // Persist session so owner can return to dashboard anytime
+      localStorage.setItem('slotlock_business_id', business.id);
+      localStorage.setItem('slotlock_business_name', business.name);
       router.push(`/dashboard/${business.id}`);
     } catch (err) {
       setError('Something went wrong. Please try again.');

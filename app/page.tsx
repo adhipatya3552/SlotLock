@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SessionCTA } from '@/components/session-cta';
 import { Header } from '@/components/header';
 import { BookingDemo } from '@/components/booking-demo';
 import { FeatureCard } from '@/components/feature-card';
@@ -31,20 +32,7 @@ export default function Home() {
               Fast, global scheduling with absolute consistency. Powered by Amazon Aurora DSQL to make race conditions physically impossible.
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Link
-                href="/signup"
-                className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/95 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Create Your Account
-              </Link>
-              <Link
-                href="/resilience"
-                className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 px-6 py-3.5 text-sm font-semibold transition-all hover:border-white/20 hover:scale-[1.02]"
-              >
-                Explore DSQL Resilience
-              </Link>
-            </div>
+            <SessionCTA />
             
             {/* Value Indicators */}
             <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/5 text-sm">
