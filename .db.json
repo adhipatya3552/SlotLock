@@ -1,0 +1,83 @@
+{
+  "businesses": [
+    {
+      "id": "biz-1",
+      "name": "Bloom Hair Studio",
+      "ownerEmail": "owner@bloomhair.com",
+      "createdAt": "2026-06-21T09:34:36.896Z"
+    },
+    {
+      "id": "biz-5e023bb6",
+      "name": "Glow Wellness Studio",
+      "ownerEmail": "owner@glow.com",
+      "createdAt": "2026-06-21T09:34:36.899Z"
+    },
+    {
+      "id": "biz-bebe9923",
+      "name": "Elite Advisory Services",
+      "ownerEmail": "consultant@elite.com",
+      "type": "Consultancy",
+      "createdAt": "2026-06-27T12:05:30.319Z"
+    },
+    {
+      "id": "biz-f94b1eae",
+      "name": "Glow Wellness Studio",
+      "ownerEmail": "adhipatya.saxena@gmail.com",
+      "type": "salon",
+      "createdAt": "2026-06-27T12:07:32.300Z"
+    }
+  ],
+  "slots": [
+    {
+      "id": "slot-1",
+      "businessId": "biz-1",
+      "startTime": "2026-06-28T09:00:00Z",
+      "endTime": "2026-06-28T10:00:00Z",
+      "status": "open",
+      "createdAt": "2026-06-27T12:15:24.531Z"
+    },
+    {
+      "id": "slot-2",
+      "businessId": "biz-1",
+      "startTime": "2026-06-28T10:00:00Z",
+      "endTime": "2026-06-28T11:00:00Z",
+      "status": "booked",
+      "customerName": "Sarah Johnson",
+      "customerContact": "sarah@example.com, +1-555-0101",
+      "depositPaid": true,
+      "createdAt": "2026-06-27T12:15:24.531Z"
+    },
+    {
+      "id": "slot-3",
+      "businessId": "biz-1",
+      "startTime": "2026-06-28T14:00:00Z",
+      "endTime": "2026-06-28T15:00:00Z",
+      "status": "open",
+      "createdAt": "2026-06-27T12:15:24.531Z"
+    },
+    {
+      "id": "slot-4",
+      "businessId": "biz-1",
+      "startTime": "2026-06-29T11:00:00Z",
+      "endTime": "2026-06-29T12:00:00Z",
+      "status": "open",
+      "createdAt": "2026-06-27T12:15:24.531Z"
+    },
+    {
+      "id": "slot-a4f6f2f7",
+      "businessId": "biz-5e023bb6",
+      "startTime": "2026-06-28T10:00:00Z",
+      "endTime": "2026-06-28T11:00:00Z",
+      "status": "open",
+      "createdAt": "2026-06-27T12:15:24.531Z"
+    },
+    {
+      "id": "slot-b1c2d3e4",
+      "businessId": "biz-5e023bb6",
+      "startTime": "2026-06-29T15:00:00Z",
+      "endTime": "2026-06-29T16:00:00Z",
+      "status": "open",
+      "createdAt": "2026-06-27T12:15:24.531Z"
+    }
+  ]
+}

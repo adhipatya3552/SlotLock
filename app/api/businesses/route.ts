@@ -1,9 +1,17 @@
-import { createBusiness, getAllBusinesses } from '@/lib/mock-data';
+import { createBusiness, getAllBusinesses } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET() {
-  const businesses = getAllBusinesses();
-  return NextResponse.json(businesses);
+  try {
+    const businesses = await getAllBusinesses();
+    return NextResponse.json(businesses);
+  } catch (error) {
+    console.error('API Error (GET businesses):', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch businesses' },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -17,9 +25,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const business = createBusiness(name, ownerEmail, type);
+    const business = await createBusiness(name, ownerEmail, type);
     return NextResponse.json(business, { status: 201 });
   } catch (error) {
+    console.error('API Error (POST business):', error);
     return NextResponse.json(
       { error: 'Failed to create business' },
       { status: 500 }

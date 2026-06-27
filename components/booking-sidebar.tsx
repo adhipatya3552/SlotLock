@@ -1,6 +1,6 @@
 'use client';
 
-import { TimeSlot } from '@/lib/mock-data';
+import { TimeSlot } from '@/lib/types';
 
 interface BookingSidebarProps {
   selectedSlot: TimeSlot | null;
@@ -12,6 +12,7 @@ interface BookingSidebarProps {
   onFormChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => Promise<void>;
   isSubmitting: boolean;
+  error?: string | null;
 }
 
 export function BookingSidebar({
@@ -20,6 +21,7 @@ export function BookingSidebar({
   onFormChange,
   onSubmit,
   isSubmitting,
+  error,
 }: BookingSidebarProps) {
   return (
     <div
@@ -29,6 +31,12 @@ export function BookingSidebar({
     >
       <h2 className="mb-6 text-lg font-semibold text-foreground">Your Details</h2>
 
+      {error && (
+        <div className="mb-5 rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          {error}
+        </div>
+      )}
+
       {selectedSlot ? (
         <form onSubmit={onSubmit} className="space-y-5">
           {/* Selected slot preview */}
@@ -36,7 +44,7 @@ export function BookingSidebar({
             <p className="text-xs font-bold text-primary uppercase tracking-widest mb-2">
               📅 Selected Time
             </p>
-            <p className="font-semibold text-foreground text-base">{selectedSlot.date}</p>
+            <p className="font-semibold text-foreground text-base">{selectedSlot.startTime.split('T')[0]}</p>
             <p className="text-sm text-muted-foreground mt-1">
               {selectedSlot.startTime} – {selectedSlot.endTime}
             </p>
