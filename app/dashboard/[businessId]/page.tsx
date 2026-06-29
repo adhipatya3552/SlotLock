@@ -178,7 +178,7 @@ export default function DashboardPage() {
   const formatTimeStr = (isoString: string) => {
     try {
       const d = new Date(isoString);
-      return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+      return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'UTC' });
     } catch {
       return isoString;
     }
@@ -187,7 +187,7 @@ export default function DashboardPage() {
   const formatDateStr = (isoString: string) => {
     try {
       const d = new Date(isoString);
-      return d.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+      return d.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
     } catch {
       return isoString;
     }
